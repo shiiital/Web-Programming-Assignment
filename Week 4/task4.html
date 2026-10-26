@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+  <body style="font-family:system-ui;padding:20px;max-width:420px;margin:auto">
+    <style>
+      h2 { color: #1a56db; }
+      #search {
+        width:100%; padding:10px 14px; font-size:16px;
+        border:2px solid #1a56db; border-radius:10px; margin-bottom:14px;
+      }
+      .student {
+        padding:10px 14px; margin-bottom:6px;
+        background:#f0f4ff; border-radius:8px; border:1px solid #c8d4f0;
+        font-size:15px;
+      }
+      mark { background: #f7df1e; border-radius: 3px; }
+      #no-results {
+        display:none; color:#9ca3af; text-align:center; padding:20px;
+      }
+    </style>
+
+    <h2>Student Search</h2>
+    <input id="search" type="text" placeholder="Search students...">
+    <div id="student-list">
+      <div class="student" data-name="Smriti Rai">Smriti Rai — Information Technology</div>
+      <div class="student" data-name="Ayush Thapa">Ayush Thapa — Computer Applications</div>
+      <div class="student" data-name="Shree Magar">Shree Magar — Cyber Security</div>
+    </div>
+    <p id="no-results">No students found.</p>
+
+    <script>
+      const searchBox = document.querySelector("#search");
+      const students = document.querySelectorAll(".student");
+      const noResults = document.querySelector("#no-results");
+
+      searchBox.addEventListener("input", (e) => {
+        const term = e.target.value.toLowerCase();
+        let visibleCount = 0;
+
+        students.forEach(student => {
+          const name = student.dataset.name.toLowerCase();
+          const text = student.dataset.name + " — " + student.textContent.split("—")[1].trim();
+
+          if (name.includes(term)) {
+            student.style.display = "";
+            visibleCount++;
+            if (term) {
+              const regex = new RegExp(`(${term})`, "gi");
+              student.innerHTML = text.replace(regex, "<mark>$1</mark>");
+            } else {
+              student.innerHTML = text;
+            }
+          } else {
+            student.style.display = "none";
+          }
+        });
+
+        noResults.style.display = visibleCount === 0 ? "block" : "none";
+      });
+    </script>
+  </body>
+</html>
