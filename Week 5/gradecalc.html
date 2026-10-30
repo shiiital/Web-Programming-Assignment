@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Grade Evaluator | JavaScript Conditional Statements</title>
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      font-family: "Segoe UI", sans-serif;
+      background-color: #f3e5f5; /* light lavender */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .container {
+      width: 80%;
+      max-width: 800px;
+      background-color: #ede7f6;
+      border-radius: 12px;
+      padding: 40px;
+      box-shadow: 0 0 20px rgba(106, 27, 154, 0.3);
+      text-align: center;
+    }
+
+    h1 {
+      color: #6a1b9a;
+      margin-bottom: 15px;
+    }
+
+    p {
+      font-size: 16px;
+      color: #4a148c;
+      margin-bottom: 25px;
+    }
+
+    input {
+      padding: 10px;
+      border: 2px solid #9c27b0;
+      border-radius: 8px;
+      margin-right: 10px;
+      font-size: 16px;
+    }
+
+    button {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      background-color: #ba68c8;
+      color: white;
+      font-size: 16px;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #9c27b0;
+    }
+
+    #result {
+      margin-top: 30px;
+      font-size: 20px;
+      font-weight: bold;
+      color: #6a1b9a;
+      background-color: #d1c4e9;
+      padding: 20px;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Understanding If / Else</h1>
+    <p>This program checks a student's score using conditional statements and assigns the appropriate grade.</p>
+
+    <input type="number" id="scoreInput" placeholder="Enter score (0-100)">
+    <button onclick="evaluateGrade()">Evaluate</button>
+
+    <div id="result"></div>
+  </div>
+
+  <script>
+    function evaluateGrade() {
+      let score = parseInt(document.getElementById("scoreInput").value);
+      let grade = "";
+      let message = "";
+
+      if (score >= 90) {
+        grade = "A";
+        message = "Excellent work!";
+      } else if (score >= 80) {
+        grade = "B";
+        message = "Good job!";
+      } else if (score >= 70) {
+        grade = "C";
+        message = "Fair effort.";
+      } else {
+        grade = "F";
+        message = "Needs improvement.";
+      }
+
+      document.getElementById("result").innerHTML =
+        "Student Score: " + score + " / 100<br>" +
+        "Grade: " + grade + "<br>" +
+        "Result: " + message;
+    }
+  </script>
+</body>
+</html>

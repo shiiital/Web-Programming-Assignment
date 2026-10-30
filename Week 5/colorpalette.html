@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Interactive Color Palette</title>
+  <style>
+    body {
+      font-family: "Segoe UI", sans-serif;
+      background-color: #fdfdfd;
+      color: #444;
+      text-align: center;
+      padding: 40px;
+    }
+
+    h1 {
+      color: #6a5acd;
+      margin-bottom: 10px;
+    }
+
+    p {
+      font-size: 16px;
+      margin-bottom: 20px;
+      color: #555;
+    }
+
+    #palette {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+
+    .color-box {
+      width: 80px;
+      height: 80px;
+      border-radius: 12px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      font-weight: bold;
+      color: #333;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .color-box:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    }
+
+    input {
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      margin-right: 10px;
+    }
+
+    button {
+      padding: 8px 16px;
+      margin: 5px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+      background-color: #e0e0e0;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #d0d0d0;
+    }
+  </style>
+</head>
+<body>
+  <h1>Interactive Color Palette</h1>
+  <p>Click a box to expand and see its hex code. Double-click a box to remove it. Your palette is saved in this browser.</p>
+
+  <div id="palette">
+    <div class="color-box" style="background-color:#ffb3ba">#ffb3ba</div>
+    <div class="color-box" style="background-color:#ffdfba">#ffdfba</div>
+    <div class="color-box" style="background-color:#ffffba">#ffffba</div>
+    <div class="color-box" style="background-color:#baffc9">#baffc9</div>
+    <div class="color-box" style="background-color:#bae1ff">#bae1ff</div>
+    <div class="color-box" style="background-color:#dab6fc">#dab6fc</div>
+  </div>
+
+  <input type="text" id="colorInput" placeholder="Hex color, e.g. #a8e6cf">
+  <button onclick="addColor()">Add Color</button>
+  <button onclick="exportPNG()">Export PNG</button>
+  <button onclick="resetPalette()">Reset</button>
+
+  <script>
+    const palette = document.getElementById("palette");
+
+    function addColor() {
+      const hex = document.getElementById("colorInput").value;
+      if(/^#([0-9A-F]{3}){1,2}$/i.test(hex)) {
+        const box = document.createElement("div");
+        box.className = "color-box";
+        box.style.backgroundColor = hex;
+        box.textContent = hex;
+        addBoxEvents(box);
+        palette.appendChild(box);
+      }
+    }
+
+    function addBoxEvents(box) {
+      box.addEventListener("click", () => {
+        box.style.width = "100px";
+        box.style.height = "100px";
+      });
+      box.addEventListener("dblclick", () => {
+        palette.removeChild(box);
+      });
+    }
+
+    document.querySelectorAll(".color-box").forEach(addBoxEvents);
+
+    function exportPNG() {
+      alert("Export PNG functionality would go here.");
+    }
+
+    function resetPalette() {
+      palette.innerHTML = "";
+    }
+  </script>
+</body>
+</html>

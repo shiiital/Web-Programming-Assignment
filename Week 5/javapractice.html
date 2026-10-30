@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>JavaScript Practice</title>
+  <style>
+    body {
+      font-family: "Segoe UI", sans-serif;
+      background-color: #fdfdfd;
+      margin: 0;
+      padding: 40px;
+      text-align: center;
+      color: #444;
+    }
+
+    h1 {
+      color: #6a5acd;
+      margin-bottom: 30px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+
+    .box {
+      background-color: #fff;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      transition: transform 0.2s ease;
+    }
+
+    .box:hover {
+      transform: scale(1.03);
+    }
+
+    .box h2 {
+      font-size: 18px;
+      margin-bottom: 15px;
+      color: #6a5acd;
+    }
+
+    .box button {
+      padding: 8px 16px;
+      margin: 5px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      background-color: #a8e6cf; /* pastel mint */
+      color: #333;
+      transition: background-color 0.3s ease;
+    }
+
+    .box button:hover {
+      background-color: #81c784;
+      color: white;
+    }
+
+    input {
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      margin-bottom: 10px;
+    }
+
+    .pastel1 { background-color: #ffb3ba; }
+    .pastel2 { background-color: #ffdfba; }
+    .pastel3 { background-color: #ffffba; }
+    .pastel4 { background-color: #baffc9; }
+    .pastel5 { background-color: #bae1ff; }
+    .pastel6 { background-color: #dab6fc; }
+  </style>
+</head>
+<body>
+  <h1>JavaScript Practice</h1>
+  <div class="grid">
+    <div class="box pastel1">
+      <h2>Variables and Output</h2>
+      <button onclick="showStudentInfo()">Show Student Info</button>
+      <p id="studentInfo"></p>
+    </div>
+
+    <div class="box pastel2">
+      <h2>Change HTML Elements</h2>
+      <p id="changeBox">This box can change its look.</p>
+      <button onclick="toggleStyle()">Toggle Style</button>
+      <button onclick="editText()">Edit Text</button>
+    </div>
+
+    <div class="box pastel3">
+      <h2>Read User Input</h2>
+      <input type="text" id="nameInput" placeholder="Type your name">
+      <button onclick="sayHello()">Say Hello</button>
+      <p id="helloOutput"></p>
+    </div>
+
+    <div class="box pastel4">
+      <h2>Conditions (if / else)</h2>
+      <input type="number" id="scoreInput" placeholder="Score 0-100">
+      <button onclick="getGrade()">Get Grade</button>
+      <p id="gradeOutput"></p>
+    </div>
+
+    <div class="box pastel5">
+      <h2>Loops</h2>
+      <input type="number" id="numInput" placeholder="Number">
+      <button onclick="makeTable()">Make Table</button>
+      <button onclick="sumNumbers()">Sum 1 to 10</button>
+      <p id="loopOutput"></p>
+    </div>
+
+    <div class="box pastel6">
+      <h2>localStorage</h2>
+      <input type="text" id="langInput" placeholder="Favorite language">
+      <button onclick="saveLang()">Save</button>
+      <button onclick="loadLang()">Load</button>
+      <button onclick="clearLang()">Clear</button>
+      <p id="langOutput"></p>
+    </div>
+  </div>
+
+  <script>
+    function showStudentInfo() {
+      document.getElementById("studentInfo").textContent = "Name: Alex, Age: 20, Major: CS";
+    }
+
+    function toggleStyle() {
+      const box = document.getElementById("changeBox");
+      box.style.color = box.style.color === "red" ? "black" : "red";
+    }
+
+    function editText() {
+      document.getElementById("changeBox").textContent = "Text has been edited!";
+    }
+
+    function sayHello() {
+      const name = document.getElementById("nameInput").value;
+      document.getElementById("helloOutput").textContent = "Hello, " + name + "!";
+    }
+
+    function getGrade() {
+      const score = parseInt(document.getElementById("scoreInput").value);
+      let grade = "";
+      if (score >= 90) grade = "A";
+      else if (score >= 80) grade = "B";
+      else if (score >= 70) grade = "C";
+      else grade = "F";
+      document.getElementById("gradeOutput").textContent = "Grade: " + grade;
+    }
+
+    function makeTable() {
+      const num = parseInt(document.getElementById("numInput").value);
+      let output = "";
+      for (let i = 1; i <= 10; i++) {
+        output += num + " x " + i + " = " + (num * i) + "<br>";
+      }
+      document.getElementById("loopOutput").innerHTML = output;
+    }
+
+    function sumNumbers() {
+      let sum = 0;
+      for (let i = 1; i <= 10; i++) sum += i;
+      document.getElementById("loopOutput").textContent = "Sum: " + sum;
+    }
+
+    function saveLang() {
+      const lang = document.getElementById("langInput").value;
+      localStorage.setItem("favLang", lang);
+    }
+
+    function loadLang() {
+      const lang = localStorage.getItem("favLang");
+      document.getElementById("langOutput").textContent = "Favorite: " + (lang || "None saved");
+    }
+
+    function clearLang() {
+      localStorage.removeItem("favLang");
+      document.getElementById("langOutput").textContent = "Cleared!";
+    }
+  </script>
+</body>
+</html>
