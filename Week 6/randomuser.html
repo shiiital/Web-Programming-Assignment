@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>🌸 Random User Generator</title>
+  <style>
+    body {
+      font-family: "Segoe UI", sans-serif;
+      background-color: #fdf6f0;
+      color: #444;
+      text-align: center;
+      padding: 40px;
+    }
+
+    h1 {
+      color: #6a5acd;
+      margin-bottom: 10px;
+    }
+
+    h3 {
+      color: #9c27b0;
+      margin-bottom: 30px;
+    }
+
+    button {
+      padding: 12px 24px;
+      margin: 10px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: bold;
+      background-color: #a8e6cf;
+      color: #333;
+      font-size: 18px;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    button:hover {
+      background-color: #81c784;
+      color: white;
+      transform: scale(1.05);
+    }
+
+    .profile {
+      background-color: #fff;
+      border-radius: 12px;
+      padding: 20px;
+      margin: 20px auto;
+      width: 80%;
+      max-width: 500px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      text-align: left;
+    }
+
+    .profile img {
+      border-radius: 50%;
+      margin-bottom: 15px;
+    }
+
+    .profile p {
+      font-size: 16px;
+      margin: 5px 0;
+    }
+  </style>
+</head>
+<body>
+  <h1>🌸 Random User</h1>
+  <h3>Generate a random sample profile</h3>
+
+  <button onclick="generateUser()">🌍 Generate User</button>
+
+  <div id="profile" class="profile">
+    <p>Click the button to load a user!</p>
+  </div>
+
+  <script>
+    async function generateUser() {
+      const response = await fetch("https://randomuser.me/api/");
+      const data = await response.json();
+      const user = data.results[0];
+      displayUser(user.name.first + " " + user.name.last, user.email, user.location.country, user.picture.large);
+    }
+
+    function displayUser(name, email, country, picture) {
+      document.getElementById("profile").innerHTML = `
+        <img src="${picture}" alt="Profile Picture">
+        <p><strong>Name:</strong> ${name}</p>
+        <p><strong>Email:</strong> ${email}</p>
+        <p><strong>Country:</strong> ${country}</p>
+      `;
+    }
+  </script>
+</body>
+</html>
+
