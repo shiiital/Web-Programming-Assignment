@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Login Form</title>
+  <style>
+    body {
+      font-family: 'Dancing Script', cursive;
+      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .login-box {
+      background: white;
+      padding: 40px;
+      border-radius: 15px;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+      text-align: center;
+      width: 350px;
+    }
+    h1 {
+      font-size: 2.5em;
+      color: #ff6f91;
+      margin-bottom: 20px;
+    }
+    input[type="email"], input[type="password"] {
+      width: 100%;
+      padding: 15px;
+      margin: 10px 0;
+      border: 2px solid #ff6f91;
+      border-radius: 10px;
+      font-size: 1.2em;
+      font-family: 'Poppins', sans-serif;
+    }
+    .checkbox {
+      margin: 15px 0;
+      font-size: 1.1em;
+      color: #555;
+    }
+    button {
+      width: 100%;
+      padding: 15px;
+      background-color: #ff6f91;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 1.3em;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    button:hover {
+      background-color: #ff3f6d;
+    }
+  </style>
+</head>
+<body>
+  <div class="login-box">
+    <h1>Login Form</h1>
+    <form>
+      <input type="email" placeholder="Email" required>
+      <input type="password" placeholder="Password" required>
+      <div class="checkbox">
+        <label><input type="checkbox"> Remember me</label>
+      </div>
+      <button type="submit">Sign In</button>
+    </form>
+  </div>
+</body>
+</html>

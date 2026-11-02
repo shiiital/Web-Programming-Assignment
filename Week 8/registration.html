@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Student Registration</title>
+  <style>
+    body {
+      font-family: 'Monocursive', cursive;
+      background: linear-gradient(135deg, #fbc2eb, #a6c1ee);
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .form-box {
+      background: white;
+      padding: 40px;
+      border-radius: 15px;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+      width: 450px;
+    }
+    h1 {
+      text-align: center;
+      font-size: 2.5em;
+      color: #6a0572;
+      margin-bottom: 25px;
+    }
+    h2 {
+      font-size: 1.5em;
+      color: #d6336c;
+      margin-top: 25px;
+      border-bottom: 2px solid #d6336c;
+      padding-bottom: 5px;
+    }
+    label {
+      display: block;
+      margin: 15px 0 5px;
+      font-size: 1.1em;
+      color: #333;
+    }
+    input, select {
+      width: 100%;
+      padding: 12px;
+      border: 2px solid #6a0572;
+      border-radius: 10px;
+      font-size: 1.1em;
+    }
+    input:focus, select:focus {
+      outline: none;
+      border-color: #ff6f91;
+      box-shadow: 0 0 8px #ff6f91;
+    }
+    .checkbox {
+      margin: 15px 0;
+      font-size: 1.1em;
+      color: #555;
+    }
+    button {
+      width: 100%;
+      padding: 15px;
+      margin-top: 20px;
+      background-color: #6a0572;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 1.3em;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    button:hover {
+      background-color: #45034d;
+    }
+  </style>
+</head>
+<body>
+  <div class="form-box">
+    <h1>Student Registration</h1>
+
+    <h2>Personal Info</h2>
+    <form>
+      <label for="name">Full Name</label>
+      <input type="text" id="name" name="name" placeholder="Enter your full name" required>
+
+      <label for="studentId">Student ID</label>
+      <input type="text" id="studentId" name="studentId" placeholder="9-digit student ID" required>
+
+      <label for="dob">Date of Birth</label>
+      <input type="date" id="dob" name="dob" required>
+
+      <label for="major">Major</label>
+      <select id="major" name="major" required>
+        <option value="">Select your major</option>
+        <option value="Computer Science">Computer Science</option>
+        <option value="Information Technology">Information Technology</option>
+        <option value="Software Engineering">Software Engineering</option>
+        <option value="Data Science">Data Science</option>
+      </select>
+
+      <label for="experience">Years of Coding Experience</label>
+      <input type="range" id="experience" name="experience" min="0" max="10" value="0" oninput="expOutput.value = experience.value">
+      <output id="expOutput">0 years</output>
+
+      <h2>Account Info</h2>
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" placeholder="Enter your email" required>
+
+      <label for="phone">Phone Number</label>
+      <input type="tel" id="phone" name="phone" placeholder="Enter your phone number" required>
+
+      <label for="password">Password</label>
+      <input type="password" id="password" name="password" placeholder="At least 8 characters" minlength="8" required>
+
+      <label for="confirmPassword">Confirm Password</label>
+      <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Re-enter your password" minlength="8" required>
+
+      <div class="checkbox">
+        <label><input type="checkbox" required> I agree to the Terms & Conditions</label>
+      </div>
+
+      <button type="submit">Register</button>
+    </form>
+  </div>
+</body>
+</html>

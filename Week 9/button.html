@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Keyboard Access</title>
+  <style>
+    body {
+      font-family: 'Monocursive', cursive;
+      background: linear-gradient(135deg, #fbc2eb, #a6c1ee);
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+    h1 {
+      font-size: 2.5em;
+      color: #6a0572;
+      margin-bottom: 20px;
+    }
+    p {
+      font-size: 1.2em;
+      color: #333;
+      margin-bottom: 30px;
+    }
+    .buttons {
+      display: flex;
+      gap: 20px;
+    }
+    button {
+      font-size: 1.3em;
+      padding: 15px 30px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    button:focus {
+      outline: 3px solid #ff6f91;
+      transform: scale(1.05);
+      box-shadow: 0 0 10px #ff6f91;
+    }
+    .green {
+      background-color: #4CAF50;
+      color: white;
+    }
+    .red {
+      background-color: #f44336;
+      color: white;
+    }
+    .message {
+      margin-top: 30px;
+      font-size: 1.2em;
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+  <h1>Keyboard Access</h1>
+  <p>Use Tab to move between the buttons. Press Enter or Space to activate the selected button.</p>
+  <div class="buttons">
+    <button class="green" id="testBtn">Test Button</button>
+    <button class="red" id="closeBtn">x</button>
+  </div>
+  <div class="message" id="message">Select a button to test it.</div>
+
+  <script>
+    const testBtn = document.getElementById('testBtn');
+    const closeBtn = document.getElementById('closeBtn');
+    const message = document.getElementById('message');
+
+    testBtn.addEventListener('click', () => {
+      message.textContent = "✅ Test Button activated!";
+    });
+
+    closeBtn.addEventListener('click', () => {
+      message.textContent = "❌ Close Button activated!";
+    });
+  </script>
+</body>
+</html>
