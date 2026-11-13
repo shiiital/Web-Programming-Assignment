@@ -2,88 +2,207 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Validation Styles</title>
   <style>
+    * {
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
     body {
-      font-family: 'Monocursive', cursive;
-      background: linear-gradient(135deg, #ffdde1, #ee9ca7);
       margin: 0;
-      padding: 0;
+      min-height: 100vh;
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh;
-    }
-    .form-box {
-      background: white;
-      padding: 40px;
-      border-radius: 15px;
-      box-shadow: 0 6px 12px rgba(0,0,0,0.15);
-      width: 400px;
-    }
-    h1 {
-      text-align: center;
-      font-size: 2.5em;
-      color: #d6336c;
-      margin-bottom: 25px;
-    }
-    label {
-      display: block;
-      margin: 15px 0 5px;
-      font-size: 1.2em;
-      color: #333;
-    }
-    input {
-      width: 100%;
-      padding: 12px;
-      border: 2px solid #d6336c;
-      border-radius: 10px;
-      font-size: 1.1em;
-    }
-    input:focus {
-      outline: none;
-      border-color: #ff6f91;
-      box-shadow: 0 0 8px #ff6f91;
-    }
-    button {
-      width: 100%;
-      padding: 15px;
-      margin-top: 20px;
-      background-color: #d6336c;
-      color: white;
-      border: none;
-      border-radius: 10px;
-      font-size: 1.3em;
-      cursor: pointer;
       transition: background 0.3s ease;
     }
-    button:hover {
-      background-color: #a61e4d;
+
+    .card {
+      background: #ffffff;
+      width: 100%;
+      max-width: 440px;
+      padding: 40px 35px;
+      border-radius: 16px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
     }
-    .note {
+
+    h1 {
       text-align: center;
-      margin-top: 15px;
-      font-size: 1em;
-      color: #555;
+      margin-top: 0;
+      margin-bottom: 28px;
+      font-size: 28px;
+    }
+
+    .form-group {
+      margin-bottom: 18px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 6px;
+      color: #333;
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    input {
+      width: 100%;
+      padding: 11px 14px;
+      border: 1.5px solid #c97b96;
+      border-radius: 8px;
+      font-size: 14px;
+      outline: none;
+      transition: all 0.2s ease;
+    }
+
+    .error-msg {
+      font-size: 12px;
+      margin-top: 5px;
+      min-height: 16px;
+    }
+
+    button {
+      width: 100%;
+      padding: 13px;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 8px;
+      transition: opacity 0.2s ease;
+    }
+
+    button:hover {
+      opacity: 0.9;
+    }
+
+    .hint {
+      text-align: center;
+      color: #666;
+      font-size: 13px;
+      margin-top: 16px;
+      margin-bottom: 0;
     }
   </style>
 </head>
 <body>
-  <div class="form-box">
-    <h1>Validation Styles</h1>
-    <form>
-      <label for="studentId">Student ID</label>
-      <input type="text" id="studentId" name="studentId" value="202112345" required>
 
-      <label for="email">Email</label>
-      <input type="email" id="email" name="email" value="name@example.com" required>
+  <div class="card">
+    <h1 id="formTitle">Validation Styles</h1>
+    <form id="validationForm" novalidate>
+      
+      <div class="form-group">
+        <label for="studentId">Student ID</label>
+        <input type="text" id="studentId" placeholder="202112345">
+        <div class="error-msg" id="idError"></div>
+      </div>
 
-      <label for="password">Password</label>
-      <input type="password" id="password" name="password" placeholder="At least 8 characters" minlength="8" required>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" placeholder="name@example.com">
+        <div class="error-msg" id="emailError"></div>
+      </div>
 
-      <button type="submit">Submit</button>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" placeholder="At least 8 characters">
+        <div class="error-msg" id="passwordError"></div>
+      </div>
+
+      <button type="submit" id="submitBtn">Submit</button>
+      <p class="hint">Try invalid values to see validation messages.</p>
     </form>
-    <div class="note">Try invalid values to see validation messages.</div>
   </div>
+
+  <script>
+    // 1. JSON Style Configuration Object
+    const validationStylesJSON = {
+      theme: {
+        bodyBackground: "linear-gradient(135deg, #f8c8d8 0%, #f4a8be 100%)",
+        primaryColor: "#c83267",
+        defaultBorder: "#c97b96"
+      },
+      states: {
+        valid: {
+          borderColor: "#2e7d32",
+          backgroundColor: "#f1f8e9",
+          textColor: "#2e7d32"
+        },
+        invalid: {
+          borderColor: "#d32f2f",
+          backgroundColor: "#ffebee",
+          textColor: "#d32f2f"
+        }
+      }
+    };
+
+    // 2. Apply Base JSON Theme Styles on Load
+    document.body.style.background = validationStylesJSON.theme.bodyBackground;
+    document.getElementById('formTitle').style.color = validationStylesJSON.theme.primaryColor;
+    document.getElementById('submitBtn').style.backgroundColor = validationStylesJSON.theme.primaryColor;
+
+    // Helper function to apply JSON validation state styles
+    function applyFieldStyle(inputEl, msgEl, isValid, message) {
+      const styleState = isValid ? validationStylesJSON.states.valid : validationStylesJSON.states.invalid;
+      
+      inputEl.style.borderColor = styleState.borderColor;
+      inputEl.style.backgroundColor = styleState.backgroundColor;
+      msgEl.style.color = styleState.textColor;
+      msgEl.textContent = message;
+    }
+
+    // 3. Form Validation Logic
+    const form = document.getElementById('validationForm');
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      let allValid = true;
+
+      const studentId = document.getElementById('studentId');
+      const email = document.getElementById('email');
+      const password = document.getElementById('password');
+
+      const idError = document.getElementById('idError');
+      const emailError = document.getElementById('emailError');
+      const passwordError = document.getElementById('passwordError');
+
+      // Validate Student ID (9 digits)
+      const idRegex = /^\d{9}$/;
+      if (idRegex.test(studentId.value.trim())) {
+        applyFieldStyle(studentId, idError, true, '✓ Valid Student ID');
+      } else {
+        applyFieldStyle(studentId, idError, false, 'Student ID must be exactly 9 digits.');
+        allValid = false;
+      }
+
+      // Validate Email (standard email format)
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (emailRegex.test(email.value.trim())) {
+        applyFieldStyle(email, emailError, true, '✓ Valid Email');
+      } else {
+        applyFieldStyle(email, emailError, false, 'Please enter a valid email address (e.g., name@example.com).');
+        allValid = false;
+      }
+
+      // Validate Password (at least 8 characters)
+      if (password.value.length >= 8) {
+        applyFieldStyle(password, passwordError, true, '✓ Strong Password');
+      } else {
+        applyFieldStyle(password, passwordError, false, 'Password must be at least 8 characters.');
+        allValid = false;
+      }
+
+      if (allValid) {
+        setTimeout(() => {
+          alert('Form submitted successfully!');
+        }, 100);
+      }
+    });
+  </script>
+
 </body>
 </html>

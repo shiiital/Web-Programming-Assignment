@@ -2,86 +2,200 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Form Validation</title>
   <style>
+    * {
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
     body {
-      font-family: 'Monocursive', cursive;
-      background: linear-gradient(135deg, #fbc2eb, #a6c1ee);
       margin: 0;
-      padding: 0;
+      min-height: 100vh;
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh;
+      background: linear-gradient(135deg, #fbc2eb 0%, #a6c1ee 100%);
     }
-    .form-box {
-      background: white;
-      padding: 40px;
-      border-radius: 15px;
-      box-shadow: 0 6px 12px rgba(0,0,0,0.15);
-      width: 400px;
+
+    .card {
+      background: #ffffff;
+      width: 100%;
+      max-width: 440px;
+      padding: 40px 35px;
+      border-radius: 16px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
     }
+
     h1 {
       text-align: center;
-      font-size: 2.5em;
-      color: #6a0572;
-      margin-bottom: 25px;
+      color: #5e006c;
+      margin-top: 0;
+      margin-bottom: 28px;
+      font-size: 28px;
     }
+
+    .form-group {
+      margin-bottom: 18px;
+    }
+
     label {
       display: block;
-      margin: 15px 0 5px;
-      font-size: 1.2em;
+      margin-bottom: 6px;
       color: #333;
+      font-size: 14px;
+      font-weight: 500;
     }
+
     input {
       width: 100%;
-      padding: 12px;
-      border: 2px solid #6a0572;
-      border-radius: 10px;
-      font-size: 1.1em;
+      padding: 11px 14px;
+      border: 1.5px solid #6b4c6e;
+      border-radius: 8px;
+      font-size: 14px;
+      outline: none;
+      transition: border-color 0.2s;
     }
+
+    input:focus {
+      border-color: #6a007a;
+    }
+
+    input.invalid {
+      border-color: #d93025;
+      background-color: #fff8f8;
+    }
+
+    .error-msg {
+      color: #d93025;
+      font-size: 12px;
+      margin-top: 5px;
+      min-height: 16px;
+    }
+
     button {
       width: 100%;
-      padding: 15px;
-      margin-top: 20px;
-      background-color: #6a0572;
+      padding: 13px;
+      background-color: #6a007a;
       color: white;
       border: none;
-      border-radius: 10px;
-      font-size: 1.3em;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 600;
       cursor: pointer;
-      transition: background 0.3s ease;
+      margin-top: 8px;
+      transition: background-color 0.2s;
     }
+
     button:hover {
-      background-color: #45034d;
+      background-color: #52005e;
     }
-    .note {
+
+    .hint {
       text-align: center;
-      margin-top: 15px;
-      font-size: 1em;
-      color: #555;
+      color: #666;
+      font-size: 13px;
+      margin-top: 16px;
+      margin-bottom: 0;
     }
   </style>
 </head>
 <body>
-  <div class="form-box">
+
+  <div class="card">
     <h1>Form Validation</h1>
-    <form>
-      <label for="studentId">Student ID</label>
-      <input type="text" id="studentId" name="studentId" value="202112345" required>
+    <form id="validationForm" novalidate>
+      
+      <!-- Use placeholder instead of value so fields start empty -->
+      <div class="form-group">
+        <label for="studentId">Student ID</label>
+        <input type="text" id="studentId" placeholder="202112345">
+        <div class="error-msg" id="idError"></div>
+      </div>
 
-      <label for="email">Email</label>
-      <input type="email" id="email" name="email" value="name@gachon.ac.kr" required>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" placeholder="name@gachon.ac.kr">
+        <div class="error-msg" id="emailError"></div>
+      </div>
 
-      <label for="password">Password</label>
-      <input type="password" id="password" name="password" placeholder="At least 8 characters" minlength="8" required>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" placeholder="At least 8 characters">
+        <div class="error-msg" id="passwordError"></div>
+      </div>
 
-      <label for="age">Age</label>
-      <input type="number" id="age" name="age" placeholder="Enter your age" min="1" required>
+      <div class="form-group">
+        <label for="age">Age</label>
+        <input type="number" id="age" placeholder="Enter your age">
+        <div class="error-msg" id="ageError"></div>
+      </div>
 
       <button type="submit">Submit</button>
+      <p class="hint">Try invalid values to see validation messages.</p>
     </form>
-    <div class="note">Try invalid values to see validation messages.</div>
   </div>
-</body>
-</html>
+
+  <script>
+    const form = document.getElementById('validationForm');
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault(); // Prevent form submission to run validation
+      let isValid = true;
+
+      // Get input elements
+      const studentId = document.getElementById('studentId');
+      const email = document.getElementById('email');
+      const password = document.getElementById('password');
+      const age = document.getElementById('age');
+
+      // Get error display elements
+      const idError = document.getElementById('idError');
+      const emailError = document.getElementById('emailError');
+      const passwordError = document.getElementById('passwordError');
+      const ageError = document.getElementById('ageError');
+
+      // Reset previous errors
+      [studentId, email, password, age].forEach(input => input.classList.remove('invalid'));
+      [idError, emailError, passwordError, ageError].forEach(err => err.textContent = '');
+
+      // 1. Student ID Validation (Must be exactly 9 digits)
+      const idRegex = /^\d{9}$/;
+      if (!idRegex.test(studentId.value.trim())) {
+        idError.textContent = 'Student ID must be exactly 9 digits (e.g., 202112345).';
+        studentId.classList.add('invalid');
+        isValid = false;
+      }
+
+      // 2. Email Validation (Must end with @gachon.ac.kr)
+      const emailRegex = /^[a-zA-Z0-9._%+-]+@gachon\.ac\.kr$/;
+      if (!emailRegex.test(email.value.trim())) {
+        emailError.textContent = 'Please enter a valid @gachon.ac.kr email address.';
+        email.classList.add('invalid');
+        isValid = false;
+      }
+
+      // 3. Password Validation (At least 8 characters)
+      if (password.value.length < 8) {
+        passwordError.textContent = 'Password must be at least 8 characters long.';
+        password.classList.add('invalid');
+        isValid = false;
+      }
+
+      // 4. Age Validation (Must be between 17 and 100)
+      const ageVal = Number(age.value);
+      if (age.value.trim() === '' || isNaN(ageVal) || ageVal < 17 || ageVal > 100) {
+        ageError.textContent = 'Please enter a valid age between 17 and 100.';
+        age.classList.add('invalid');
+        isValid = false;
+      }
+
+      // If all fields pass validation
+      if (isValid) {
+        alert('Form submitted successfully!');
+        form.reset();
+      }
+    });
+  </script>
+
